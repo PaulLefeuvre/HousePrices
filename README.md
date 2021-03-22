@@ -9,4 +9,5 @@ This machine learning problem is my first real-world application of the skills I
 
 ## Programs used
 **Jupyter (and hence Python)** - to process the given csv files and convert it to Octave-friendly data, by using the very useful functions such as the One-Hot encoder. Then outputs a txt file that Octave can import
+
 **Octave** - for the actual Machine Learning, to go through the data, determine the optimum regularization parameters, and find the best theta to fit the function. Will output the prediction data. 
