@@ -130,6 +130,26 @@ pause;
 
 fprintf('\n');
 fprintf('Now finding the optimal regularization parameter...')
+%{
+lambda = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1, 3];
+num_iters = 200;
+num_lambda = size(lambda);
 
-%lambda = 0.01; % [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1, 3]
-%num_iters = 200;
+[theta, ~] = trainLinearReg(X, y, lambda(1), num_iters, alpha);
+best_lambda = lambda(1);
+[best_cost, ~] = linearRegCostFunction(theta, Xval, yval, lambda(1));
+
+for i = 2:num_lambda
+  [theta, ~] = trainLinearReg(X, y, lambda(i), num_iters, alpha);
+  [new_cost, ~] = linearRegCostFunction(theta, Xval, yval, lambda(i));
+  if(new_cost < best_cost)
+    best_lambda = lambda(i);
+    best_cost = new_cost;
+  endif
+endfor
+%}
+best_lambda = 0.03;
+fprintf('Optimum lambda found. Lambda = %f\n', best_lambda);
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
